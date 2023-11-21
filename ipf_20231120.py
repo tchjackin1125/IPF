@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov 21 13:13:46 2023
+
+@author: chtsai
+"""
+
 
 from __future__ import print_function
 import sys
@@ -294,7 +302,7 @@ def convert_df(df):
     return df.to_csv().encode('utf-8')
 
 st.write("""
-# 檔案上傳演練
+# Iterative Proportional Fitting
 """)
 
 st.sidebar.header('User Input Features')
@@ -421,12 +429,36 @@ else:
   
     # 直接show既有的sales_data
     def main():
-        st.title("Example title part")
-        st.subheader("Example subheader part")
+        st.title("Uploaded file example")
+        st.subheader("Input file")
+        st.caption('1. The file extension must be .xlsx')
+        st.caption('2. The data must have "weightgroup" and "feature" columns, and the contents must be numbers')
+        st.caption('3. Whether it is the content in weightgroup column or the feature columns, the starting value must be 1')
+        st.caption('4. In addition to weightgroup and feature columns, it can have other columns such as id, date, etc')
+        df_input = pd.read_excel('input_template.xlsx')
+
+        st.table(df_input.head(10))
         
+        def convert_to_csv(df):
+            return df.to_csv(index=False).encode('utf-8')
+        df_input_csv = convert_to_csv(df_input)
+
+        st.download_button(label = "Download the input file template", data = df_input_csv, file_name='input_template.csv')
 
         
+        st.subheader("Goal file (Cooks Children TX file from open source)")
+        st.caption('1. The file extension must be ".xlsx"')
+        st.caption('2. The columns must contain "weightgroup", "totalgoal", and the feature part')
+        st.caption('3. The rule of the feature part: there is a underline between feature and the content, such as feature1_3, feature4_2, etc')
+        #st.caption('1. The extension should be ".xlsx"')
+        df_goals = pd.read_excel('goals_CooksChildren - fix.xlsx')
         
+        st.table(df_goals.head(10))
+        
+        df_goals_csv = convert_to_csv(df_goals)
+        
+        st.download_button(label = "Download the goal file template", data = df_goals_csv, file_name='goals_template.csv')
+
     if __name__ == '__main__':
         main()
 
