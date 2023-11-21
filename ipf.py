@@ -314,8 +314,8 @@ if uploaded_file1 and uploaded_file2 is not None: # 若檔案上傳不是無東�
     df = pd.read_excel(uploaded_file1) # show上傳的data
     df_target = pd.read_excel(uploaded_file2) # show上傳的data
     def main():
-        st.title("Title part")
-        st.subheader("Subheader part")
+        st.title(" ")
+        st.subheader("The difference table heat map ")
         
 
         df = pd.read_excel(uploaded_file1) # show上傳的data
