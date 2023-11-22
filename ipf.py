@@ -320,21 +320,41 @@ if uploaded_file1 and uploaded_file2 is not None: # 若檔案上傳不是無東�
 
         df = pd.read_excel(uploaded_file1) # show上傳的data
         df_target = pd.read_excel(uploaded_file2) # show上傳的data
+
+        #####
+        df_0 = pd.read_excel(uploaded_file1)
+        #####
         
         df.columns = [col.lower() for col in df.columns]
         df.columns = df.columns.str.replace(r'\(.*\)', '', regex=True)
         df.columns = df.columns.str.strip()
         df.columns = df.columns.str.replace('code', '', regex=False)
+
+        #####
+        df_0.columns = [col.lower() for col in df_0.columns]
+        df_0.columns = df_0.columns.str.replace(r'\(.*\)', '', regex=True)
+        df_0.columns = df_0.columns.str.strip()
+        df_0.columns = df_0.columns.str.replace('code', '', regex=False)
+        #####
         
         #df['weightgroup'] = df['weightgroup'].astype(str)                   ###############
         #df_target['weightgroup'] = df_target['weightgroup'].astype(str)     ###############
         
         df['weightgroup'] = [str(i).zfill(3) for i in df['weightgroup']]
         df_target['weightgroup'] = [str(i).zfill(3) for i in df_target['weightgroup']]
+
+        #####
+        df_0['weightgroup'] = [str(i).zfill(3) for i in df_0['weightgroup']]
+        #####
         
         if not any(col in df.columns for col in ["weight", "weight group", "weightgroup"]):
             if "district" in df.columns:
                 df = df.rename(columns={"district": "weightgroup"})
+        #####
+        if not any(col in df_0.columns for col in ["weight", "weight group", "weightgroup"]):
+            if "district" in df.columns:
+                df_0 = df_0.rename(columns={"district": "weightgroup"})
+        #####
         
         feature_new = [col for col in list(df.columns) if col.startswith('feature')]
         column_groups = {}
@@ -357,18 +377,18 @@ if uploaded_file1 and uploaded_file2 is not None: # 若檔案上傳不是無東�
 
         xip = df_target.groupby('weightgroup')['totalgoal'].sum()
         
-        #######################################################   
-                
-        df_0 = df
-        df_0['weight'] = sum(list(df_target['totalgoal']))/len(df)
+        #######################################################
+        
+        
+        df_0['weight'] = sum(list(df_target['totalgoal']))/len(df_0)
         b = pd.DataFrame()
         for p in range(len(feature_new)):
-            b = pd.concat([b, pd.DataFrame(df_0.groupby(['weightgroup', feature_new[p]])['total'].sum().unstack())], axis=1)
+            b = pd.concat([b, pd.DataFrame(df_0.groupby(['weightgroup', feature_new[p]])['weight'].sum().unstack())], axis=1)
         b.columns = flattened_list
         b.reset_index(inplace = True)
         
         for q in flattened_list:
-          b[q] = b[q]/df_target['totalgoal']
+            b[q] = b[q]/df_target['totalgoal']
         
         #######################################################
         
