@@ -357,6 +357,21 @@ if uploaded_file1 and uploaded_file2 is not None: # 若檔案上傳不是無東�
 
         xip = df_target.groupby('weightgroup')['totalgoal'].sum()
         
+        #######################################################   
+                
+        df_0 = df
+        df_0['weight'] = sum(list(df_target['totalgoal']))/len(df)
+        b = pd.DataFrame()
+        for p in range(len(feature_new)):
+            b = pd.concat([b, pd.DataFrame(df_0.groupby(['weightgroup', feature_new[p]])['total'].sum().unstack())], axis=1)
+        b.columns = flattened_list
+        b.reset_index(inplace = True)
+        
+        for q in flattened_list:
+          b[q] = b[q]/df_target['totalgoal']
+        
+        #######################################################
+        
         for n in range(50):
         
             for k in range(len(feature_new)):  #feature_new = ['feature1', 'feature2', ...]
@@ -421,6 +436,31 @@ if uploaded_file1 and uploaded_file2 is not None: # 若檔案上傳不是無東�
              file_name='weighted.csv',
              mime='text/csv',
          )
+        ################################
+        ######################################################
+        
+        diff_0 = b[flattened_list] - df_target[flattened_list]
+        
+        diff_0_csv = convert_df(diff_0)
+        weight_0_csv = convert_df(df_0)
+        
+        st.download_button(
+             label = "Download the difference table(without IPF process)",
+             data = diff_0_csv,
+             file_name='diff_none_ipf.csv',
+             mime='text/csv',
+         )
+        
+        st.download_button(
+             label = "Download the weighted table(without IPF process)",
+             data = weight_0_csv,
+             file_name='weighted_none_ipf.csv',
+             mime='text/csv',
+         )
+        ######################################################
+
+
+    
         
         
     if __name__ == '__main__':
