@@ -692,7 +692,7 @@ if st.sidebar.button('Submit'):
             st.caption('2. The data must have "weightgroup" and "feature" columns, and the contents must be numbers')
             st.caption('3. Whether it is the content in weightgroup column or the feature columns, the starting value must be 1')
             st.caption('4. In addition to weightgroup and feature columns, it can have other columns such as id, date, etc')
-            df_input = pd.read_excel('/Users/chtsai/Downloads/input_template.xlsx')
+            df_input = pd.read_excel('input_template.xlsx')
     
             st.table(df_input.head(10))
             
@@ -708,7 +708,7 @@ if st.sidebar.button('Submit'):
             st.caption('2. The columns must contain "weightgroup", "totalgoal", and the feature part')
             st.caption('3. The rule of the feature part: there is a underline between feature and the content, such as feature1_3, feature4_2, etc')
             #st.caption('1. The extension should be ".xlsx"')
-            df_goals = pd.read_excel('/Users/chtsai/Downloads/goals_CooksChildren - fix.xlsx')
+            df_goals = pd.read_excel('goals_CooksChildren - fix.xlsx')
             
             st.table(df_goals.head(10))
             
