@@ -34,9 +34,9 @@ uploaded_file2 = st.sidebar.file_uploader("Upload your goals data", type=["csv",
 
 
 st.sidebar.header('Set the Max/Min Weighted Number:')
-max_weigjted_number = st.sidebar.number_input("Maximun Weighted Number (Default: 100000)",101,100000)
+max_weigjted_number = st.sidebar.number_input("Maximun Weighted Number (Recommendation: 100000)",101,100000)
 
-min_weigjted_number = st.sidebar.number_input("Minimun Weighted Number (Default: 10)",10,100)
+min_weigjted_number = st.sidebar.number_input("Minimun Weighted Number (Recommendation: 10)",10,100)
 
 
 if st.sidebar.button('Submit'):
