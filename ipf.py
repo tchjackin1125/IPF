@@ -752,7 +752,7 @@ if st.sidebar.button('Submit'):
         def main():
             st.title("Uploaded file example")
             st.subheader("Input file")
-            st.caption('1. The file extension must be ".xlsx"')
+            st.caption('1. The file extension must be ".xlsx" or ".csv"')
             st.caption('2. The data must have "weightgroup" and "feature" columns, and the contents must be numbers')
             st.caption('3. Whether it is the content in weightgroup column or the feature columns, the starting value must be 1')
             st.caption('4. In addition to weightgroup and feature columns, it can have other columns such as id, date, etc')
@@ -768,7 +768,7 @@ if st.sidebar.button('Submit'):
     
             
             st.subheader("Goal file (Cooks Children TX file from open source)")
-            st.caption('1. The file extension must be ".xlsx"')
+            st.caption('1. The file extension must be ".xlsx" or ".csv"')
             st.caption('2. The columns must contain "weightgroup", "totalgoal", and the feature part')
             st.caption('3. The rule of the feature part: there is a underline between feature and the content, such as feature1_3, feature4_2, etc')
             #st.caption('1. The extension should be ".xlsx"')
@@ -788,7 +788,7 @@ else:
     def main():
         st.title("Uploaded file example")
         st.subheader("Input file")
-        st.caption('1. The file extension must be ".xlsx"')
+        st.caption('1. The file extension must be ".xlsx" or ".csv"')
         st.caption('2. The data must have "weightgroup" and "feature" columns, and the contents must be numbers')
         st.caption('3. Whether it is the content in weightgroup column or the feature columns, the starting value must be 1')
         st.caption('4. In addition to weightgroup and feature columns, it can have other columns such as id, date, etc')
@@ -804,7 +804,7 @@ else:
 
         
         st.subheader("Goal file (Cooks Children TX file from open source)")
-        st.caption('1. The file extension must be ".xlsx"')
+        st.caption('1. The file extension must be ".xlsx" or ".csv"')
         st.caption('2. The columns must contain "weightgroup", "totalgoal", and the feature part')
         st.caption('3. The rule of the feature part: there is a underline between feature and the content, such as feature1_3, feature4_2, etc')
         #st.caption('1. The extension should be ".xlsx"')
