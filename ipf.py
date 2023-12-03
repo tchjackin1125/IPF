@@ -636,23 +636,34 @@ if st.sidebar.button('Submit'):
                 diff_csv = convert_df(diff)
                 weight_csv = convert_df(df_weight)
                 
+                diff_0 = b[flattened_list] - df_target[flattened_list]
                 
+                diff_0_csv = convert_df(diff_0)
+                weight_0_csv = convert_df(df_0)
                 
                 def create_zip_file():
 
                     # Specify CSV file names
                     csv_file1 = 'diff_table_' + datetime.datetime.now().strftime("%Y%m%d_%H%M") + '.csv'
                     csv_file2 = 'weighted_table_' + datetime.datetime.now().strftime("%Y%m%d_%H%M") + '.csv'
+                    csv_file3 = 'diff_table_none_ipf_' + datetime.datetime.now().strftime("%Y%m%d_%H%M") + '.csv'
+                    csv_file4 = 'weighted_table_none_ipf_' + datetime.datetime.now().strftime("%Y%m%d_%H%M") + '.csv'
                 
                     # Save DataFrames to CSV files
                     diff.to_csv(csv_file1, index=False)
                     df_weight.to_csv(csv_file2, index=False)
+                    diff_0.to_csv(csv_file3, index=False)
+                    df_0.to_csv(csv_file4, index=False)
+                    
+                    
                 
                     # Create a zip file in memory and add CSV files to it
                     zip_buffer = BytesIO()
                     with ZipFile(zip_buffer, 'w') as zipf:
                         zipf.write(csv_file1)
                         zipf.write(csv_file2)
+                        zipf.write(csv_file3)
+                        zipf.write(csv_file4)
                 
                     return zip_buffer
                 
@@ -683,10 +694,7 @@ if st.sidebar.button('Submit'):
                 ################################
                 ######################################################
                 
-                diff_0 = b[flattened_list] - df_target[flattened_list]
-                
-                diff_0_csv = convert_df(diff_0)
-                weight_0_csv = convert_df(df_0)
+
                 
                 st.download_button(
                      label = "Download the difference table(without IPF process, just for a comparison)",
@@ -726,7 +734,7 @@ if st.sidebar.button('Submit'):
             st.caption('2. The data must have "weightgroup" and "feature" columns, and the contents must be numbers')
             st.caption('3. Whether it is the content in weightgroup column or the feature columns, the starting value must be 1')
             st.caption('4. In addition to weightgroup and feature columns, it can have other columns such as id, date, etc')
-            df_input = pd.read_excel('/Users/chtsai/Downloads/input_template.xlsx')
+            df_input = pd.read_excel('input_template.xlsx')
     
             st.table(df_input.head(10))
             
@@ -742,7 +750,7 @@ if st.sidebar.button('Submit'):
             st.caption('2. The columns must contain "weightgroup", "totalgoal", and the feature part')
             st.caption('3. The rule of the feature part: there is a underline between feature and the content, such as feature1_3, feature4_2, etc')
             #st.caption('1. The extension should be ".xlsx"')
-            df_goals = pd.read_excel('/Users/chtsai/Downloads/goals_CooksChildren - fix.xlsx')
+            df_goals = pd.read_excel('goals_CooksChildren - fix.xlsx')
             
             st.table(df_goals.head(10))
             
@@ -762,7 +770,7 @@ else:
         st.caption('2. The data must have "weightgroup" and "feature" columns, and the contents must be numbers')
         st.caption('3. Whether it is the content in weightgroup column or the feature columns, the starting value must be 1')
         st.caption('4. In addition to weightgroup and feature columns, it can have other columns such as id, date, etc')
-        df_input = pd.read_excel('/Users/chtsai/Downloads/input_template.xlsx')
+        df_input = pd.read_excel('input_template.xlsx')
 
         st.table(df_input.head(10))
         
@@ -778,7 +786,7 @@ else:
         st.caption('2. The columns must contain "weightgroup", "totalgoal", and the feature part')
         st.caption('3. The rule of the feature part: there is a underline between feature and the content, such as feature1_3, feature4_2, etc')
         #st.caption('1. The extension should be ".xlsx"')
-        df_goals = pd.read_excel('/Users/chtsai/Downloads/goals_CooksChildren - fix.xlsx')
+        df_goals = pd.read_excel('goals_CooksChildren - fix.xlsx')
         
         st.table(df_goals.head(10))
         
