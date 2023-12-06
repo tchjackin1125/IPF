@@ -48,8 +48,10 @@ if st.sidebar.button('Submit'):
         #####
         #data cleaning for input
         
+           
         if uploaded_file1.type == "text/csv":
-            df = pd.read_csv(uploaded_file1)
+            uploaded_file1.seek(0)
+            df = pd.read_csv(uploaded_file1, low_memory=False)
             #df_target = pd.read_csv(uploaded_file2)
         elif uploaded_file1.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
             df = pd.read_excel(uploaded_file1)
@@ -57,10 +59,12 @@ if st.sidebar.button('Submit'):
         
         if uploaded_file2.type == "text/csv":
             #df = pd.read_csv(uploaded_file1)
-            df_target = pd.read_csv(uploaded_file2)
+            uploaded_file2.seek(0)
+            df_target = pd.read_csv(uploaded_file2, low_memory=False)
         elif uploaded_file2.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
             #df = pd.read_excel(uploaded_file1)
             df_target = pd.read_excel(uploaded_file2)
+
         
         #####
         #data cleaning for input
@@ -557,8 +561,10 @@ if st.sidebar.button('Submit'):
 
 
 
+           
                 if uploaded_file1.type == "text/csv":
-                    df = pd.read_csv(uploaded_file1)
+                    uploaded_file1.seek(0)
+                    df = pd.read_csv(uploaded_file1, low_memory=False)
                     #df_target = pd.read_csv(uploaded_file2)
                 elif uploaded_file1.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
                     df = pd.read_excel(uploaded_file1)
@@ -566,10 +572,12 @@ if st.sidebar.button('Submit'):
                 
                 if uploaded_file2.type == "text/csv":
                     #df = pd.read_csv(uploaded_file1)
-                    df_target = pd.read_csv(uploaded_file2)
+                    uploaded_file2.seek(0)
+                    df_target = pd.read_csv(uploaded_file2, low_memory=False)
                 elif uploaded_file2.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
                     #df = pd.read_excel(uploaded_file1)
                     df_target = pd.read_excel(uploaded_file2)
+
 
 
                 
