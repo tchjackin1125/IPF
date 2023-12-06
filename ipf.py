@@ -552,8 +552,27 @@ if st.sidebar.button('Submit'):
                 st.subheader("The difference table heat map ")
                 
         
-                df = pd.read_excel(uploaded_file1) # show上傳的data
-                df_target = pd.read_excel(uploaded_file2) # show上傳的data
+                #df = pd.read_excel(uploaded_file1) # show上傳的data
+                #df_target = pd.read_excel(uploaded_file2) # show上傳的data
+
+
+
+                if uploaded_file1.type == "text/csv":
+                    df = pd.read_csv(uploaded_file1)
+                    #df_target = pd.read_csv(uploaded_file2)
+                elif uploaded_file1.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+                    df = pd.read_excel(uploaded_file1)
+                    #df_target = pd.read_excel(uploaded_file2)
+                
+                if uploaded_file2.type == "text/csv":
+                    #df = pd.read_csv(uploaded_file1)
+                    df_target = pd.read_csv(uploaded_file2)
+                elif uploaded_file2.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+                    #df = pd.read_excel(uploaded_file1)
+                    df_target = pd.read_excel(uploaded_file2)
+
+
+                
                 
                 df.columns = [col.lower() for col in df.columns]
                 df.columns = df.columns.str.replace(r'\(.*\)', '', regex=True)
