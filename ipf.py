@@ -792,7 +792,7 @@ else:
         st.caption('2. The data must have "weightgroup" and "feature" columns, and the contents must be numbers')
         st.caption('3. Whether it is the content in weightgroup column or the feature columns, the starting value must be 1')
         st.caption('4. In addition to weightgroup and feature columns, it can have other columns such as id, date, etc')
-        df_input = pd.read_excel(template_input.xlsx')
+        df_input = pd.read_excel('template_input.xlsx')
 
         st.table(df_input.head(10))
         
